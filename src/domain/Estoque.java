@@ -24,6 +24,26 @@ public class Estoque {
         this.produtoId = produtoId;
         this.quantidade = quantidade;
 
+    }
 
+    public void adicionarEstoque(int quantidade){
+        if (quantidade <= 0){
+            throw new IllegalArgumentException("Quantidade para adicionar deve ser maior que zero.");
+        }
+
+        this.quantidade += quantidade;
+
+    }
+
+    public void removerEstoque(int quantidade){
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade para remover deve ser maior que zero.");
+        }
+
+        if (quantidade > this.quantidade) {
+            throw new IllegalArgumentException("Estoque insuficiente.");
+        }
+
+        this.quantidade -= quantidade;
     }
 }

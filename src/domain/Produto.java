@@ -28,11 +28,16 @@ public class Produto {
 
     public boolean isAtivo() {return ativo;}
 
-    public Produto(String nome, String descricao, CategoriaProduto categoria, double preco) {
+    public Produto(int id, String nome, CategoriaProduto categoria, double preco) {
 
         if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("Nome do produto invalido.");
+            throw new IllegalArgumentException("Erro.");
         }
+
+        if (id <= 0){
+            throw new IllegalArgumentException("ID do produto invalido.");
+        }
+
         if (categoria == null) {
             throw new IllegalArgumentException("Categoria do produto invalida.");
         }
@@ -45,7 +50,7 @@ public class Produto {
         this.categoria = categoria;
         this.preco = preco;
         this.ativo = true;
-
+        this.id = id;
 
     }
 }
