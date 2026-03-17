@@ -14,9 +14,7 @@ public class Produto {
 
     public String getNome() {return nome;}
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public String getDescricao() {return descricao;}
 
     public CategoriaProduto getCategoria() {
         return categoria;
@@ -28,7 +26,7 @@ public class Produto {
 
     public boolean isAtivo() {return ativo;}
 
-    public Produto(int id, String nome, CategoriaProduto categoria, double preco) {
+    public Produto(int id, String nome, CategoriaProduto categoria, double preco, boolean ativo) {
 
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Erro.");
@@ -46,11 +44,15 @@ public class Produto {
         }
 
         this.nome = nome;
-        this.descricao = descricao;
         this.categoria = categoria;
         this.preco = preco;
-        this.ativo = true;
+        this.ativo = ativo;
         this.id = id;
 
     }
+
+    public Produto(int id, String nome, CategoriaProduto categoria, double preco) {
+        this(id, nome, categoria, preco, true);
+    }
+
 }

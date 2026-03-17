@@ -16,3 +16,7 @@ target/
 # OS
 Desktop.ini
 .DS_Store
+
+/out/
+.idea/
+*.csv

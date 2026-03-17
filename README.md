@@ -1,30 +1,37 @@
-# sistema-caixa-java
-Sistema de caixa e estoque em Java com foco em POO, organização em camadas e simulação de regras de negócio.
-# Sistema de Caixa e Estoque em Java
+Sistema de Caixa e Controle de Estoque em Java
 
-Projeto em desenvolvimento com foco na prática de Java, Programação Orientada a Objetos e organização de sistemas comerciais.
+Projeto desenvolvido com o objetivo de praticar conceitos fundamentais de backend utilizando Java puro.
 
-## 🎯 Objetivo
-Simular um sistema real de controle de produtos e pedidos, aplicando conceitos fundamentais de desenvolvimento back-end.
+O sistema simula um caixa comercial rodando no console, permitindo cadastro de produtos, controle de estoque, realização de vendas e persistência de dados em arquivos CSV através de uma camada de repository.
 
-## 🚀 Funcionalidades atuais
-- Cadastro de produtos
-- Organização por categorias
-- Estrutura em camadas
-- Menu interativo no console
+Funcionalidades
 
-## 🧠 Conceitos aplicados
-- Programação Orientada a Objetos
-- Listas
-- Enums
-- Separação de responsabilidades
-- Organização em pacotes
+Cadastro e listagem de produtos
 
-## 📂 Estrutura do projeto
-- domain
-- service
-- repository
-- ui
+Controle de entrada e baixa de estoque
 
-## 📌 Status
-Projeto em desenvolvimento contínuo.
+Realização de vendas com múltiplos itens
+
+Cálculo automático de subtotal e total
+
+Seleção de forma de pagamento
+
+Geração de comprovante de venda
+
+Histórico persistido das vendas
+
+Arquitetura
+
+O projeto foi estruturado em camadas:
+
+domain → entidades do sistema
+
+service → regras de negócio
+
+repository → persistência em arquivos CSV
+
+ui → interação via console
+
+Objetivo
+
+Construir base sólida em lógica de negócio e organização de sistemas backend antes da evolução para projetos com Spring Boot e banco de dados relacional.

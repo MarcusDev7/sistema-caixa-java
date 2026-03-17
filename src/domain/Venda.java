@@ -10,18 +10,32 @@ public class Venda {
     private FormaPagamento formaPagamento;
     private double valorTotal;
 
-    public Venda(List<ItemVenda> itens, FormaPagamento formaPagamento) {
+    public Venda(int id, List<ItemVenda> itens, FormaPagamento formaPagamento) {
+        this(id, LocalDateTime.now(), itens, formaPagamento);
+    }
+
+    public Venda(int id, LocalDateTime dataHora, List<ItemVenda> itens, FormaPagamento formaPagamento) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID da venda inválido.");
+        }
+
+        if (dataHora == null) {
+            throw new IllegalArgumentException("Data/hora da venda inválida.");
+        }
 
         if (itens == null || itens.isEmpty()) {
             throw new IllegalArgumentException("Lista de itens da venda não pode ser nula ou vazia.");
         }
+
         if (formaPagamento == null) {
-            throw new IllegalArgumentException("Forma de Pagamento da venda não pode ser nula ou vazia.");
+            throw new IllegalArgumentException("Forma de pagamento da venda não pode ser nula.");
         }
 
+        this.id = id;
+        this.dataHora = dataHora;
         this.itens = itens;
         this.formaPagamento = formaPagamento;
-        this.dataHora = LocalDateTime.now();
         this.valorTotal = calcularTotal();
     }
 
@@ -31,5 +45,25 @@ public class Venda {
             total += item.getSubtotal();
         }
         return total;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public List<ItemVenda> getItens() {
+        return itens;
+    }
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
     }
 }

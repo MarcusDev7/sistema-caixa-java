@@ -1,16 +1,18 @@
 package service;
 
 import domain.Estoque;
+import repository.EstoqueRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EstoqueService {
 
     private List<Estoque> estoqueProdutos;
+    private EstoqueRepository estoqueRepository;
 
     public EstoqueService() {
-        estoqueProdutos = new ArrayList<>();
+        this.estoqueRepository = new EstoqueRepository();
+        this.estoqueProdutos = estoqueRepository.carregar();
     }
 
     public void adicionarEstoque(int produtoId, int quantidade) {
@@ -18,12 +20,14 @@ public class EstoqueService {
         for (Estoque e : estoqueProdutos) {
             if (e.getProdutoId() == produtoId) {
                 e.adicionarEstoque(quantidade);
+                estoqueRepository.salvar(estoqueProdutos);
                 return;
             }
         }
 
         Estoque novoEstoque = new Estoque(produtoId, quantidade);
         estoqueProdutos.add(novoEstoque);
+        estoqueRepository.salvar(estoqueProdutos);
     }
 
     public int buscarQuantidadePorProdutoId(int produtoId) {
@@ -40,27 +44,28 @@ public class EstoqueService {
     public boolean temEstoqueSuficiente(int produtoId, int quantidade) {
         for (Estoque e : estoqueProdutos) {
             if (e.getProdutoId() == produtoId) {
-                if (e.getQuantidade() == quantidade) {
-                    if (e.getQuantidade() >= quantidade) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
+                return e.getQuantidade() >= quantidade;
             }
         }
+
         return false;
     }
 
-    public void baixarEstoque(int produtoId, int quantidade){
-        for (Estoque e : estoqueProdutos){
-            if (e.getQuantidade() >= quantidade) {
+    public void baixarEstoque(int produtoId, int quantidade) {
+        for (Estoque e : estoqueProdutos) {
+            if (e.getProdutoId() == produtoId) {
                 e.removerEstoque(quantidade);
+                estoqueRepository.salvar(estoqueProdutos);
                 return;
             }
-
-            throw new IllegalArgumentException("invalido.");
-
         }
+
+        throw new IllegalArgumentException("Estoque do produto não encontrado.");
     }
+
+    public void limparEstoque() {
+        estoqueProdutos.clear();
+        estoqueRepository.limpar();
+    }
+
 }
